@@ -46,11 +46,11 @@ stages:
           python -m ml_service.pipelines.diabetes_regression_build_train_pipeline
       displayName: 'Publish Azure Machine Learning Pipeline'
     - task: Docker@2
+      displayName: Build an image
       inputs:
-        containerRegistry: 'docker-connection'
-        repository: 'cc-ck'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        repository: $(imageName)
+        command: build
+        Dockerfile: app/Dockerfile
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
