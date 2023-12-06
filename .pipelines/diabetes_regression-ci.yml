@@ -45,12 +45,13 @@ stages:
           # Invoke the Python building and publishing a training pipeline
           python -m ml_service.pipelines.diabetes_regression_build_train_pipeline
       displayName: 'Publish Azure Machine Learning Pipeline'
-    - task: Docker@2
+    - task: PowerShell@2
+      displayName: 'docker --version'
       inputs:
-        containerRegistry: 'docker-connection1'
-        repository: 'cc-ck'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        targetType: 'inline'
+        script: |
+         docker --version
+          Write-Host "docker --version"
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
