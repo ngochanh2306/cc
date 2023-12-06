@@ -1,11 +1,4 @@
 # Continuous Integration (CI) pipeline that orchestrates the training, evaluation, and registration of the diabetes_regression model.
- task: Docker@2
-  inputs:
-    containerRegistry: 'docker-connection'
-    repository: 'cc-ck'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
-
 resources:
   containers:
   - container: mlops
@@ -52,6 +45,12 @@ stages:
           # Invoke the Python building and publishing a training pipeline
           python -m ml_service.pipelines.diabetes_regression_build_train_pipeline
       displayName: 'Publish Azure Machine Learning Pipeline'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-connection'
+        repository: 'cc-ck'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
