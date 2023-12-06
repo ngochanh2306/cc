@@ -2,7 +2,7 @@
 - task: Docker@2
   inputs:
     containerRegistry: 'docker-connection'
-    repository: 'ccck'
+    repository: 'cc-ck'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
 
