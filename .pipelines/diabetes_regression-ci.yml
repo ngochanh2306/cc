@@ -45,30 +45,12 @@ stages:
           # Invoke the Python building and publishing a training pipeline
           python -m ml_service.pipelines.diabetes_regression_build_train_pipeline
       displayName: 'Publish Azure Machine Learning Pipeline'
-    - task: AzureCLI@2
-      displayName: Azure CLI
-      inputs:
-          azureSubscription: dbazure
-          scriptType: pscore
-          workingDirectory: $(Build.SourcesDirectory)/src
-          scriptLocation: inlineScript
-          inlineScript: |
-            az aks get-credentials -n redacted -g redacted --admin
-            
-            if ((docker buildx ls | select-string $([System.Environment]::MachineName)).length -eq 0) {
-              docker buildx create --name $([System.Environment]::MachineName) --driver kubernetes --driver-opt "replicas=1" --use
-              docker buildx inspect --bootstrap
-            }
-            $registryToken = (az acr login -n redacted --expose-token |ConvertFrom-Json).accessToken
-            $config = (@{auths=@{"redacted.azurecr.io"=@{username=[System.Guid]::Empty.ToString();password=$registryToken}}} | ConvertTo-Json)
-            $config | set-content ~/.docker/config.json
-            docker buildx build --push -t redacted.azurecr.io/documents-api:$(Build.BuildNumber) -f DocumentsDockerfile .
     - task: Docker@2
-      displayName: Build an image
       inputs:
-        repository: $(imageName)
-        command: build
-        Dockerfile: app/Dockerfile
+        containerRegistry: 'docker-connection1'
+        repository: 'cc-ck'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
