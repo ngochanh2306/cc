@@ -16,7 +16,7 @@ pr:
 
 pool:
   name: "default"
-  vmImage: "DESDES"
+  vmImage: "DES"
 
 variables:
   - group: devopsforai-aml-vg
