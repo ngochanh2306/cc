@@ -1,4 +1,10 @@
 # Continuous Integration (CI) pipeline that orchestrates the training, evaluation, and registration of the diabetes_regression model.
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker-connection'
+    repository: 'cc-ck'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 
 resources:
   containers:
