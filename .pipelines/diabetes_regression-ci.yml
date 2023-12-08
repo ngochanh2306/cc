@@ -21,8 +21,8 @@ variables:
 - group: devopsforai-aml-vg
 
 pool:
-  name: defaultdefault
-  vmImage: DESDES
+  name: default
+  vmImage: DES
 
 stages:
 - stage: 'Model_CI'
