@@ -21,8 +21,8 @@ variables:
 - group: devopsforai-aml-vg
 
 pool:
-  name: Azure Pipelines
-  vmImage: Hosted Agent
+  name: defaultdefault
+  vmImage: DESDES
 
 stages:
 - stage: 'Model_CI'
