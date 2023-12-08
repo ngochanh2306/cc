@@ -52,6 +52,10 @@ stages:
         script: |
           docker --version
           Write-Host "docker --version"
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'yourContainerRegistry'
+        dockerfile: '**/Dockerfile'
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
@@ -83,7 +87,7 @@ stages:
     dependsOn: "Get_Pipeline_ID"
     displayName: "Trigger ML Training Pipeline"
     timeoutInMinutes: 0
-    pool: server
+    pool: default
     variables:
       AMLPIPELINE_ID: $[ dependencies.Get_Pipeline_ID.outputs['getpipelineid.AMLPIPELINEID'] ]
     steps:
