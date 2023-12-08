@@ -59,7 +59,7 @@ stages:
         workingDirectory: string
         displayName: string
         failOnStderr: string
-        env: { string: string } # mapping of environment variables to add
+        env: { string: string }
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
