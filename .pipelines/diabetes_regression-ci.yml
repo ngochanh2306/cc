@@ -64,7 +64,7 @@ stages:
         arguments: |
          -d
          --name mlops
-        imageName: 'myimage:0.1'
+        imageName: 'ngochanh/myimage:0.1'
         displayName: 'Run Container'
 
 - stage: 'Trigger_AML_Pipeline'
