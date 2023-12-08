@@ -33,6 +33,12 @@ stages:
     container: mlops
     timeoutInMinutes: 0
     steps:
+  - script: |
+    sudo apt-get update
+    sudo apt-get install -y nodejs
+  displayName: 'Install Node.js'
+
+    steps:
     - template: code-quality-template.yml
     - task: AzureCLI@1
       inputs:
@@ -106,8 +112,3 @@ stages:
     timeoutInMinutes: 0
     steps:
     - template: diabetes_regression-publish-model-artifact-template.yml
-steps:
-- script: |
-    sudo apt-get update
-    sudo apt-get install -y nodejs
-  displayName: 'Install Node.js'
