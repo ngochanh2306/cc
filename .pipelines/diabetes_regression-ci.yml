@@ -55,7 +55,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'yourContainerRegistry'
-        dockerfile: '**/Dockerfile'
+        dockerfile: 'C:/Users/NgocHanh/Documents/Docker/Dockerfile'
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
