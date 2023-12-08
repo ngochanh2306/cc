@@ -3,12 +3,13 @@ resources:
 - repo: self
 
 pool: 
-  vmImage: 'ubuntu-latest'
+  name: default
+  agent: DES
 
 trigger:
   branches:
     include:
-    - master
+    - main
 
   paths:
     include:
