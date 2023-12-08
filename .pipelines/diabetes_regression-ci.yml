@@ -66,8 +66,6 @@ stages:
          --name inspiring_bassi
         imageName: 'myimage:0.1'
         displayName: 'Run Container'
-      workingDirectory: $(System.DefaultWorkingDirectory)
-
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
