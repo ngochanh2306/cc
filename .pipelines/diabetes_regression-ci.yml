@@ -2,7 +2,7 @@
 resources:
   containers:
   - container: mlops
-    image: ngochanh/myimage:0.1
+    image: node:14
 
 pr: none
 trigger:
@@ -64,7 +64,7 @@ stages:
         arguments: |
          -d
          --name mlops
-        imageName: 'ngochanh/myimage:0.1'
+        imageName: 'node:14'
         displayName: 'Run Container'
 
 - stage: 'Trigger_AML_Pipeline'
