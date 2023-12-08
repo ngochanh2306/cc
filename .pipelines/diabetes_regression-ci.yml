@@ -63,7 +63,7 @@ stages:
         command: 'run'
         arguments: |
          -d
-         --name inspiring_bassi
+         --name mlops
         imageName: 'myimage:0.1'
         displayName: 'Run Container'
 
