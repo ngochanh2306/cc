@@ -54,7 +54,7 @@ stages:
           Write-Host "docker --version"
     - task: Docker@2
       inputs:
-        containerRegistry: 'yourContainerRegistry'
+        containerRegistry: 'docker'
         dockerfile: 'C:/Users/NgocHanh/Documents/Docker/Dockerfile'
 
 - stage: 'Trigger_AML_Pipeline'
