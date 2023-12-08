@@ -53,6 +53,13 @@ stages:
         script: |
           docker --version
           Write-Host "docker --version"
+    - task: CmdLine@2
+      inputs:
+        script: string
+        workingDirectory: string
+        displayName: string
+        failOnStderr: string
+        env: { string: string } # mapping of environment variables to add
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
