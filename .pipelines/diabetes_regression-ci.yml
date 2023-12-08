@@ -2,7 +2,7 @@
 resources:
   containers:
   - container: mlops
-    image: node:14
+    image: mcr.microsoft.com/mlops/python:latest
 
 pr: none
 trigger:
