@@ -46,16 +46,12 @@ stages:
           python -m ml_service.pipelines.diabetes_regression_build_train_pipeline
       displayName: 'Publish Azure Machine Learning Pipeline'
     - task: PowerShell@2
-      displayName: 'docker --version'
       inputs:
         targetType: 'inline'
         script: |
-          docker --version
-          Write-Host "docker --version"
-    - task: PowerShell@2
-      inputs:
-       targetType: 'inline'
-       script: '$env:Path = $env:Path + ";C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"'
+          $env:Path = $env:Path + ";C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+      displayName: 'Add PowerShell to PATH'
+
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
