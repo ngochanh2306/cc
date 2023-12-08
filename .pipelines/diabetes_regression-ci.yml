@@ -23,7 +23,7 @@ variables:
 
 pool:
   name: "default"
-  vmImage: "agent"
+  vmImage: "DES"
 
 stages:
 - stage: 'Model_CI'
@@ -46,6 +46,13 @@ stages:
           # Invoke the Python building and publishing a training pipeline
           python -m ml_service.pipelines.diabetes_regression_build_train_pipeline
       displayName: 'Publish Azure Machine Learning Pipeline'
+    - task: PowerShell@2
+      displayName: 'docker --version'
+      inputs:
+        targetType: 'inline'
+        script: |
+          docker --version
+          Write-Host "docker --version"
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
