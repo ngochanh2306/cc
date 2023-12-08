@@ -1,7 +1,7 @@
 # Continuous Integration (CI) pipeline that orchestrates the training, evaluation, and registration of the diabetes_regression model.
 resources:
   containers:
-  - container: mlopsmlops
+  - container: mlops
     image: ngochanh/myimage:0.1
 
 pr: none
