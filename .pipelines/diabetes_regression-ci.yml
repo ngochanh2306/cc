@@ -1,4 +1,5 @@
 # Continuous Integration (CI) pipeline that orchestrates the training, evaluation, and registration of the diabetes_regression model.
+
 resources:
   containers:
   - container: mlops
@@ -8,7 +9,7 @@ pr: none
 trigger:
   branches:
     include:
-    - master
+    - main
   paths:
     include:
     - diabetes_regression/
@@ -21,8 +22,8 @@ variables:
 - group: devopsforai-aml-vg
 
 pool:
-  name: default
-  vmImage: DES
+  name: "default"
+  vmImage: "agent"
 
 stages:
 - stage: 'Model_CI'
@@ -33,11 +34,6 @@ stages:
     container: mlops
     timeoutInMinutes: 0
     steps:
-    - script: |
-        sudo apt-get update
-        sudo apt-get install -y nodejs
-      displayName: 'Install Node.js'
-
     - template: code-quality-template.yml
     - task: AzureCLI@1
       inputs:
@@ -50,22 +46,6 @@ stages:
           # Invoke the Python building and publishing a training pipeline
           python -m ml_service.pipelines.diabetes_regression_build_train_pipeline
       displayName: 'Publish Azure Machine Learning Pipeline'
-    - task: PowerShell@2
-      displayName: 'docker --version'
-      inputs:
-        targetType: 'inline'
-        script: |
-          docker --version
-          Write-Host "docker --version"
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'docker'
-        command: 'run'
-        arguments: |
-         -d
-         --name mlops
-        imageName: 'node:14'
-        displayName: 'Run Container'
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
