@@ -2,7 +2,7 @@
 resources:
   containers:
   - container: mlops
-    image: mcr.microsoft.com/mlops/python: ngochanh/myimage:0.1
+    image: ngochanh/myimage:0.1
 
 pr: none
 trigger:
