@@ -1,9 +1,4 @@
 # Continuous Integration (CI) pipeline that orchestrates the training, evaluation, and registration of the diabetes_regression model.
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: '$env:Path = $env:Path + ";C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"'
-
 resources:
   containers:
   - container: mlops
@@ -57,12 +52,10 @@ stages:
         script: |
           docker --version
           Write-Host "docker --version"
-    - task: CmdLine@2
+    - task: PowerShell@2
       inputs:
-        script: string
-        workingDirectory: string
-        displayName: string
-        failOnStderr: string
+       targetType: 'inline'
+       script: '$env:Path = $env:Path + ";C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"'
 
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
