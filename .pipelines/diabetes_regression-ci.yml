@@ -33,10 +33,10 @@ stages:
     container: mlops
     timeoutInMinutes: 0
     steps:
-  - script: |
-    sudo apt-get update
-    sudo apt-get install -y nodejs
-    displayName: 'Install Node.js'
+    - script: |
+        sudo apt-get update
+        sudo apt-get install -y nodejs
+      displayName: 'Install Node.js'
 
     steps:
     - template: code-quality-template.yml
